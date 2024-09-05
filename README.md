@@ -20,7 +20,7 @@ The database is configured in _**odm-tomcat/apache-tomcat-9.0.84/conf/server.xml
 
 There is an example configuration for Postgres and H2. 
 
-For a quick setup, you can start the sample server and then point to the databases that are created in the liberty _**data**_ directory
+For a quick setup, you can start the sample server and then point to the databases that are created in the Liberty _**data**_ directory
 
 ### 5. Start the server with the **startup** command
 ```
