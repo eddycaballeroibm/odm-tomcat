@@ -1,0 +1,36 @@
+----------------------------------------------------------------
+Tue Sep 03 14:47:22 PDT 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0191-b9db-4b2c-0000c3f7a360 
+on database directory C:\IBM\tomcat\apache-tomcat-9.0.84\data\resdb with class loader java.net.URLClassLoader@bc7c640c 
+Loaded from file:/C:/IBM/tomcat/apache-tomcat-9.0.84/lib/derby.jar
+java.vendor=IBM Corporation
+java.runtime.version=1.8.0_345-b01
+java.fullversion=1.8.0_345-b01
+JRE 1.8.0 Windows 10 amd64-64-Bit Compressed References 20220817_464 (JIT enabled, AOT enabled)
+OpenJ9   - 1d9d16830
+OMR      - b58aa2708
+JCL      - e361c66299 based on jdk8u345-b01
+user.dir=C:\IBM\tomcat\apache-tomcat-9.0.84\bin
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Tue Sep 03 14:48:52 PDT 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance 20e1c02b-0191-b9db-4b2c-0000c3f7a360 
+on database directory C:\IBM\tomcat\apache-tomcat-9.0.84\data\dcdb with class loader java.net.URLClassLoader@bc7c640c 
+Loaded from file:/C:/IBM/tomcat/apache-tomcat-9.0.84/lib/derby.jar
+java.vendor=IBM Corporation
+java.runtime.version=1.8.0_345-b01
+java.fullversion=1.8.0_345-b01
+JRE 1.8.0 Windows 10 amd64-64-Bit Compressed References 20220817_464 (JIT enabled, AOT enabled)
+OpenJ9   - 1d9d16830
+OMR      - b58aa2708
+JCL      - e361c66299 based on jdk8u345-b01
+user.dir=C:\IBM\tomcat\apache-tomcat-9.0.84\bin
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
