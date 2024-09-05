@@ -27,3 +27,7 @@ For a quick setup, you can start the sample server and then point to the databas
 cd C:\IBM\tomcat\tomcat-test\odm-tomcat\apache-tomcat-9.0.84\bin
 startup
 ```
+### 6. Access ODM with the links below
+http://localhost:9090/decisioncenter
+
+http://localhost:9090/res
