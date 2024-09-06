@@ -13,7 +13,7 @@ git clone <repo URL>
 set JAVA_HOME=C:\IBM\jdk\jdk
 set JRE_HOME=C:\IBM\jdk\jdk
 ```
-### 3. Copy Tomcat war files to odm-tomcat/apache-tomcat-9.0.84/webapps
+### 3. Copy Decision Center war files to odm-tomcat/apache-tomcat-9.0.84/webapps
    
 ### 4. Configure the databases
 The database is configured in _**odm-tomcat/apache-tomcat-9.0.84/conf/server.xml**_
