@@ -15,10 +15,6 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-<!-- Note:  A "Server" is not itself a "Container", so you may not
-     define subcomponents such as "Valves" at this level.
-     Documentation at /docs/config/server.html
- -->
 <Server port="8005" shutdown="SHUTDOWN">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
   <!-- Security listener. Documentation at /docs/config/listeners.html
@@ -31,11 +27,35 @@
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
 
-  <!-- Global JNDI resources
-       Documentation at /docs/jndi-resources-howto.html
-  -->
+  
   <GlobalNamingResources>
-  	<!-- This is an eample for using a Postgres database
+	
+	<!-- Decison Center H2 Database Example
+		 Start the Liberty sample server and change the url to the H2 Database that is created-->
+	<Resource name="jdbc/ilogDataSource" 
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="org.h2.Driver"
+		defaultTransactionIsolation="READ_COMMITTED"
+		url="jdbc:h2:C:/IBM/wlp/usr/servers/odm81110/data/h2/rtsdb;LOCK_TIMEOUT=20000"
+		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
+		username="ilog" password="ilog"
+		description="Decision Center Database"  />
+	
+	<!--Decison Server H2 Database Example 
+		Start the Liberty sample server and change the url to the H2 Database that is created-->
+	
+	<Resource name="jdbc/resdatasource" 
+		auth="Container"
+	    type="javax.sql.DataSource"
+	    driverClassName="org.h2.Driver"
+		defaultTransactionIsolation="READ_COMMITTED"
+	    url="jdbc:h2:C:/IBM/wlp/usr/servers/odm81110/data/h2/resdb;LOCK_TIMEOUT=20000;NON_KEYWORDS=VALUE"
+		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
+	    username="ilog" password="ilog"
+        description="Decision Server Database"  />
+			
+	<!-- Postgres database example
   
 	<Resource name="jdbc/ilogDataSource" type="javax.sql.DataSource"
 		defaultTransactionIsolation="READ_COMMITTED"
@@ -54,134 +74,86 @@
 		maxTotal="20" maxIdle="10" maxWaitMillis="-1"/>
 	-->
 	
-	<!-- Decison Center H2 Database Example
-		 Start the Liberty sample server and change the url to the H2 Database that is created-->
-    	<Resource name="jdbc/ilogDataSource" 
-		auth="Container"
-	        type="javax.sql.DataSource"
-	        driverClassName="org.h2.Driver"
+	<!-- DB2 example
+	<Resource auth="Container"
 		defaultTransactionIsolation="READ_COMMITTED"
-	        url="jdbc:h2:C:/IBM/wlp/usr/servers/odm81110/data/h2/rtsdb;LOCK_TIMEOUT=20000"
-		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
-	        username="ilog" password="ilog"
-	        description="Decision Center Database"  />
+		driverClassName="com.ibm.db2.jcc.DB2Driver"
+		name="jdbc/ilogDataSource"
+		username=""
+		password=""
+		type="javax.sql.DataSource"
+		url="jdbc:db2://localhost:50000/dcdb:currentSchema=dcschema;"
+		description="Decision Center Database"/>
+		
+	<Resource auth="Container"
+		driverClassName="com.ibm.db2.jcc.DB2Driver"
+		name="jdbc/resdatsource"
+		username=""
+		password=""
+		type="javax.sql.DataSource"
+		url="jdbc:db2://localhost:50000/resdb:currentSchema=resschema;"
+		description="Decision Server Database"/>
+    -->
 	
-	 <!--Decison Server H2 Database Example 
-		Start the Liberty sample server and change the url to the H2 Database that is created-->
+	<!-- Oracle example
+	<Resource
+		 defaultTransactionIsolation="READ_UNCOMMITTED"
+         name="jdbc/ilogDataSource"
+         auth="Container"
+         type="javax.sql.DataSource"
+         driverClassName="oracle.jdbc.OracleDriver"
+         url="jdbc:oracle:thin:@hostname:port:sid"
+         username="<username>"
+         password="<password>"
+         maxTotal="25"
+         maxIdle="10"
+         maxWaitMillis="10000"
+		 description="Decision Center Database"
+         />
 	
-	<Resource name="jdbc/resdatasource" 
-		auth="Container"
-	        type="javax.sql.DataSource"
-	        driverClassName="org.h2.Driver"
-		defaultTransactionIsolation="READ_COMMITTED"
-	        url="jdbc:h2:C:/IBM/wlp/usr/servers/odm81110/data/h2/resdb;LOCK_TIMEOUT=20000;NON_KEYWORDS=VALUE"
-		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
-	        username="ilog" password="ilog"
-	        description="Decision Server Database"  />
-    
+	<Resource
+         name="jdbc/resdatsource"
+         auth="Container"
+         type="javax.sql.DataSource"
+         driverClassName="oracle.jdbc.OracleDriver"
+         url="jdbc:oracle:thin:@hostname:port:sid"
+         username="<username>"
+         password="<password>"
+         maxTotal="25"
+         maxIdle="10"
+         maxWaitMillis="10000"
+		 description="Decision Server Database"
+         />
+	-->
+	
+	<!-- MySQL example
+	<Resource name="jdbc/ilogDataSource" auth="Container" type="javax.sql.DataSource"
+         username=""
+         password=""
+         driverClassName="com.mysql.jdbc.Driver"
+         url="jdbc:mysql://localhost:3306/dcdb"
+         maxTotal="25"
+         maxIdle="10"
+         defaultTransactionIsolation="READ_COMMITTED"
+    />
+	
+	<Resource name="jdbc/resdatsource" auth="Container" type="javax.sql.DataSource"
+         username=""
+         password=""
+         driverClassName="com.mysql.jdbc.Driver"
+         url="jdbc:mysql://localhost:3306/resdb"
+         maxTotal="25"
+         maxIdle="10"
+    />
+	-->
   </GlobalNamingResources>
 
-  <!-- A "Service" is a collection of one or more "Connectors" that share
-       a single "Container" Note:  A "Service" is not itself a "Container",
-       so you may not define subcomponents such as "Valves" at this level.
-       Documentation at /docs/config/service.html
-   -->
   <Service name="Catalina">
 
-    <!--The connectors can use a shared executor, you can define one or more named thread pools-->
-    <!--
-    <Executor name="tomcatThreadPool" namePrefix="catalina-exec-"
-        maxThreads="150" minSpareThreads="4"/>
-    -->
-
-
-    <!-- A "Connector" represents an endpoint by which requests are received
-         and responses are returned. Documentation at :
-         Java HTTP Connector: /docs/config/http.html
-         Java AJP  Connector: /docs/config/ajp.html
-         APR (HTTP/AJP) Connector: /docs/apr.html
-         Define a non-SSL/TLS HTTP/1.1 Connector on port 8080
-    -->
     <Connector port="9090" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" maxParameterCount="1000" URIEncoding="UTF-8" />
 			   
-    <!-- A "Connector" using the shared thread pool-->
-    <!--
-    <Connector executor="tomcatThreadPool"
-               port="8080" protocol="HTTP/1.1"
-               connectionTimeout="20000"
-               redirectPort="8443"
-               maxParameterCount="1000"
-               />
-    -->
-    <!-- Define an SSL/TLS HTTP/1.1 Connector on port 8443
-         This connector uses the NIO implementation. The default
-         SSLImplementation will depend on the presence of the APR/native
-         library and the useOpenSSL attribute of the AprLifecycleListener.
-         Either JSSE or OpenSSL style configuration may be used regardless of
-         the SSLImplementation selected. JSSE style configuration is used below.
-    -->
-    <!--
-    <Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
-               maxThreads="150" SSLEnabled="true"
-               maxParameterCount="1000"
-               >
-        <SSLHostConfig>
-            <Certificate certificateKeystoreFile="conf/localhost-rsa.jks"
-                         type="RSA" />
-        </SSLHostConfig>
-    </Connector>
-    -->
-    <!-- Define an SSL/TLS HTTP/1.1 Connector on port 8443 with HTTP/2
-         This connector uses the APR/native implementation which always uses
-         OpenSSL for TLS.
-         Either JSSE or OpenSSL style configuration may be used. OpenSSL style
-         configuration is used below.
-    -->
-    <!--
-    <Connector port="8443" protocol="org.apache.coyote.http11.Http11AprProtocol"
-               maxThreads="150" SSLEnabled="true"
-               maxParameterCount="1000"
-               >
-        <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol" />
-        <SSLHostConfig>
-            <Certificate certificateKeyFile="conf/localhost-rsa-key.pem"
-                         certificateFile="conf/localhost-rsa-cert.pem"
-                         certificateChainFile="conf/localhost-rsa-chain.pem"
-                         type="RSA" />
-        </SSLHostConfig>
-    </Connector>
-    -->
-
-    <!-- Define an AJP 1.3 Connector on port 8009 -->
-    <!--
-    <Connector protocol="AJP/1.3"
-               address="::1"
-               port="8009"
-               redirectPort="8443"
-               maxParameterCount="1000"
-               />
-    -->
-
-    <!-- An Engine represents the entry point (within Catalina) that processes
-         every request.  The Engine implementation for Tomcat stand alone
-         analyzes the HTTP headers included with the request, and passes them
-         on to the appropriate Host (virtual host).
-         Documentation at /docs/config/engine.html -->
-
-    <!-- You should set jvmRoute to support load-balancing via AJP ie :
-    <Engine name="Catalina" defaultHost="localhost" jvmRoute="jvm1">
-    -->
+    
     <Engine name="Catalina" defaultHost="localhost">
-
-      <!--For clustering, please take a look at documentation at:
-          /docs/cluster-howto.html  (simple how to)
-          /docs/config/cluster.html (reference documentation) -->
-      <!--
-      <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"/>
-      -->
-
-      <!-- Use the LockOutRealm to prevent attempts to guess user passwords
-           via a brute-force attack -->
 		
 		<!-- This is used to store users in memory, otherwise you need to create them in the database -->
 		<Realm className="org.apache.catalina.realm.MemoryRealm" />
@@ -189,15 +161,7 @@
 		<Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
 
-        <!-- SingleSignOn valve, share authentication between web applications
-             Documentation at: /docs/config/valve.html -->
-        <!--
-        <Valve className="org.apache.catalina.authenticator.SingleSignOn" />
-        -->
-
-        <!-- Access log processes all example.
-             Documentation at: /docs/config/valve.html
-             Note: The pattern used is equivalent to using pattern="common" -->
+        
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
