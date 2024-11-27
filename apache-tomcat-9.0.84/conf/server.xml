@@ -97,7 +97,7 @@
 	
 	<!-- Oracle example
 	<Resource
-		 defaultTransactionIsolation="READ_UNCOMMITTED"
+		 defaultTransactionIsolation="READ_COMMITTED"
          name="jdbc/ilogDataSource"
          auth="Container"
          type="javax.sql.DataSource"
