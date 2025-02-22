@@ -1,219 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Licensed to the Apache Software Foundation (ASF) under one or more
-  contributor license agreements.  See the NOTICE file distributed with
-  this work for additional information regarding copyright ownership.
-  The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
-  the License.  You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
+  9.30.212.192:9090/decisioncenter
+ -->
 <Server port="8005" shutdown="SHUTDOWN">
   <Listener className="org.apache.catalina.startup.VersionLoggerListener" />
-  <!-- Security listener. Documentation at /docs/config/listeners.html
-  <Listener className="org.apache.catalina.security.SecurityListener" />
-  -->
-  <!-- APR library loader. Documentation at /docs/apr.html -->
-  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
-  <!-- Prevent memory leaks due to use of particular java/javax APIs-->
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" />
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
   <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
 
-  
+  <!-- Global JNDI resources
+       Documentation at /docs/jndi-resources-howto.html
+  -->
   <GlobalNamingResources>
-	
-	<!-- Decison Center H2 Database Example
-		 Start the Liberty sample server and change the url to the H2 Database that is created-->
-	<Resource name="jdbc/ilogDataSource" 
+    <!-- Editable user database that can also be used by
+         UserDatabaseRealm to authenticate users
+    -->
+    <Resource name="UserDatabase" auth="Container"
+              type="org.apache.catalina.UserDatabase"
+              description="User database that can be updated and saved"
+              factory="org.apache.catalina.users.MemoryUserDatabaseFactory"
+              pathname="conf/tomcat-users.xml" />
+     
+     
+     <!-- H2 Database -->
+     <Resource name="jdbc/ilogDataSource" 
 		auth="Container"
 		type="javax.sql.DataSource"
 		driverClassName="org.h2.Driver"
 		defaultTransactionIsolation="READ_COMMITTED"
-		url="jdbc:h2:C:/IBM/wlp/usr/servers/odm81110/data/h2/rtsdb;LOCK_TIMEOUT=20000"
+		url="jdbc:h2:../data/rtsdb;LOCK_TIMEOUT=20000"
 		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
 		username="ilog" password="ilog"
 		description="Decision Center Database"  />
-	
-	<!--Decison Server H2 Database Example 
-		Start the Liberty sample server and change the url to the H2 Database that is created-->
-	
-	<Resource name="jdbc/resdatasource" 
+     
+	 <Resource name="jdbc/resdatasource" 
 		auth="Container"
 	    type="javax.sql.DataSource"
 	    driverClassName="org.h2.Driver"
 		defaultTransactionIsolation="READ_COMMITTED"
-	    url="jdbc:h2:C:/IBM/wlp/usr/servers/odm81110/data/h2/resdb;LOCK_TIMEOUT=20000;NON_KEYWORDS=VALUE"
+	    url="jdbc:h2:../data/resdb;LOCK_TIMEOUT=20000;NON_KEYWORDS=VALUE"
 		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
 	    username="ilog" password="ilog"
         description="Decision Server Database"  />
-			
-	<!-- Postgres database example
-  
-	<Resource name="jdbc/ilogDataSource" type="javax.sql.DataSource"
-		defaultTransactionIsolation="READ_COMMITTED"
-		auth="Container"
-		username="odm8111" password="odm8111"
-		driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://localhost:5432/odmtom"
-		maxTotal="20" maxIdle="10" maxWaitMillis="-1"/>
-		
-	<Resource name="jdbc/resdatasource" type="javax.sql.DataSource"
-		defaultTransactionIsolation="READ_COMMITTED"
-		auth="Container"
-		username="odmtomcatuser" password="odmtomcatuser"
-		driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://localhost:5432/odmtom"
-		maxTotal="20" maxIdle="10" maxWaitMillis="-1"/>
-	-->
-	
-	<!-- DB2 example
-	<Resource auth="Container"
-		defaultTransactionIsolation="READ_COMMITTED"
-		driverClassName="com.ibm.db2.jcc.DB2Driver"
-		name="jdbc/ilogDataSource"
-		username=""
-		password=""
-		type="javax.sql.DataSource"
-		url="jdbc:db2://localhost:50000/dcdb:currentSchema=dcschema;"
-		description="Decision Center Database"/>
-		
-	<Resource auth="Container"
-		driverClassName="com.ibm.db2.jcc.DB2Driver"
-		name="jdbc/resdatsource"
-		username=""
-		password=""
-		type="javax.sql.DataSource"
-		url="jdbc:db2://localhost:50000/resdb:currentSchema=resschema;"
-		description="Decision Server Database"/>
-    -->
-	
-	<!-- Oracle example
-	<Resource
-		 defaultTransactionIsolation="READ_COMMITTED"
-         name="jdbc/ilogDataSource"
-         auth="Container"
-         type="javax.sql.DataSource"
-         driverClassName="oracle.jdbc.OracleDriver"
-         url="jdbc:oracle:thin:@hostname:port:sid"
-         username="<username>"
-         password="<password>"
-         maxTotal="25"
-         maxIdle="10"
-         maxWaitMillis="10000"
-		 description="Decision Center Database"
-         />
-	
-	<Resource
-         name="jdbc/resdatsource"
-         auth="Container"
-         type="javax.sql.DataSource"
-         driverClassName="oracle.jdbc.OracleDriver"
-         url="jdbc:oracle:thin:@hostname:port:sid"
-         username="<username>"
-         password="<password>"
-         maxTotal="25"
-         maxIdle="10"
-         maxWaitMillis="10000"
-		 description="Decision Server Database"
-         />
-	-->
-	
-	<!-- MySQL example
-	<Resource name="jdbc/ilogDataSource" auth="Container" type="javax.sql.DataSource"
-         username=""
-         password=""
-         driverClassName="com.mysql.jdbc.Driver"
-         url="jdbc:mysql://localhost:3306/dcdb"
-         maxTotal="25"
-         maxIdle="10"
-         defaultTransactionIsolation="READ_COMMITTED"
-    />
-	
-	<Resource name="jdbc/resdatsource" auth="Container" type="javax.sql.DataSource"
-         username=""
-         password=""
-         driverClassName="com.mysql.jdbc.Driver"
-         url="jdbc:mysql://localhost:3306/resdb"
-         maxTotal="25"
-         maxIdle="10"
-    />
-	-->
+     
   </GlobalNamingResources>
 
   <Service name="Catalina">
+    <Connector port="9090" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443"
+               maxParameterCount="1000"
+               URIEncoding="UTF-8"
+               />
 
-    <Connector port="9090" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" maxParameterCount="1000" URIEncoding="UTF-8" />
-			   
-    
-    <Engine name="Catalina" defaultHost="localhost">
-		
-		<!-- This is used to store users in memory, otherwise you need to create them in the database -->
-		<Realm className="org.apache.catalina.realm.MemoryRealm" />
+     <!--User Realm-->
+     <Engine name="Catalina" defaultHost="localhost">
 
-		<Host name="localhost"  appBase="webapps"
+     <Realm className="org.apache.catalina.realm.LockOutRealm">
+        <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+               resourceName="UserDatabase"/>
+      </Realm>
+
+      <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
 
-        
+        <!-- Access log processes all example.
+             Documentation at: /docs/config/valve.html
+             Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs"
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
-		
-		<!-- Decision Center Database Context -->
-		<Context docBase="decisioncenter" path="/decisioncenter" reloadable="false">
-			<Logger className="org.apache.catalina.logger.FileLogger"
-			prefix="localhost_dc_log."
-			suffix=".txt" timestamp="true"/>
-			<ResourceLink global="jdbc/ilogDataSource" name="jdbc/ilogDataSource" type="javax.sql.DataSource"/>
-		</Context>
-		
-		<!-- Decision Center API Database Context -->
-		<Context docBase="decisioncenter-api" path="/decisioncenter-api" reloadable="false">
-			<ResourceLink global="jdbc/ilogDataSource" name="jdbc/ilogDataSource" type="javax.sql.DataSource"/>
-		</Context>
-		
-		<!-- Decision Server Database Context -->
-		<Context path="/res"
-			docBase="res.war"
-			debug="0"
-			reloadable="true"
-			crossContext="true">
-		<Logger className="org.apache.catalina.logger.FileLogger"
-			prefix="localhost_res_log."
-			suffix=".txt" timestamp="true"/>
-		<ResourceLink name="jdbc/resdatasource"
-			global="jdbc/resdatasource"
-			type="javax.sql.DataSource"/>
-		</Context>
-		
-		<!-- HTDS Context -->
-		<Context path="/DecisionService" docBase="DecisionService.war" debug="0" 
-			reloadable="true" crossContext="true">
-				  <Logger className="org.apache.catalina.logger.FileLogger" 
-			prefix="localhost_htds_log." suffix=".txt" timestamp="true"/>
-				  <ResourceLink name="jdbc/resdatasource" global="jdbc/resdatasource" 
-			type="javax.sql.DataSource"/>
-		</Context>
-		<!-- Decision Runner Context -->
-		<Context path="/DecisionRunner" 
-			docBase="DecisionRunner.war" 
-			debug="0" 
-			reloadable="true" 
-			crossContext="true">
-			<Logger className="org.apache.catalina.logger.FileLogger" 
-				prefix="localhost_res_log." 
+
+			<!--Decision Center Context-->
+			<Context docBase="decisioncenter-api" path="/decisioncenter-api" reloadable="false">
+				<ResourceLink global="jdbc/ilogDataSource" name="jdbc/ilogDataSource" type="javax.sql.DataSource"/>
+			</Context>
+
+			<Context docBase="decisioncenter" path="/decisioncenter" reloadable="false">
+				<ResourceLink global="jdbc/ilogDataSource" name="jdbc/ilogDataSource" type="javax.sql.DataSource"/>
+			</Context>
+          
+			<!--RES Context-->
+         	<Context path="/res"
+                    docBase="res.war"
+                    debug="0"
+                    reloadable="true"
+                    crossContext="true">
+               <Logger className="org.apache.catalina.logger.FileLogger"
+                    prefix="localhost_res_log."
+                    suffix=".txt" timestamp="true"/>
+               <ResourceLink name="jdbc/resdatasource"
+                    global="jdbc/resdatasource"
+                    type="javax.sql.DataSource"/>
+         	</Context>
+
+			<!--Decision Server Context-->
+			<Context path="/DecisionService" docBase="DecisionService.war" debug="0" 
+				reloadable="true" crossContext="true">
+						<Logger className="org.apache.catalina.logger.FileLogger" 
+				prefix="localhost_htds_log." suffix=".txt" timestamp="true"/>
+						<ResourceLink name="jdbc/resdatasource" global="jdbc/resdatasource" 
+				type="javax.sql.DataSource"/>
+			</Context>
+
+			<!--Decision Runner Context-->
+			<Context path="/DecisionRunner" 
+				docBase="DecisionRunner.war" 
+				debug="0" 
+				reloadable="true" 
+				crossContext="true">
+				<Logger className="org.apache.catalina.logger.FileLogger" 
+						prefix="localhost_res_log." 
 				suffix=".txt" timestamp="true"/>
-			<ResourceLink name="jdbc/resdatasource" 
+				<ResourceLink name="jdbc/resdatasource" 
 				global="jdbc/resdatasource" 
 				type="javax.sql.DataSource"/>
-		</Context> 
+			</Context> 
+
+          
       </Host>
     </Engine>
   </Service>

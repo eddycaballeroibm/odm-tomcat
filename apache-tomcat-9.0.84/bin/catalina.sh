@@ -126,9 +126,16 @@
 
 
 
-export JAVA_HOME=$CATALINA_HOME/java/jdk-17.0.13+11
-export JRE_HOME=$CATALINA_HOME/java/jdk-17.0.13+11
+
+
+
+
+
+
+
+
 export CATALINA_OPTS="-Xms4096m -Xmx8192m -Duser.timezone=America/Chicago"
+
 
 
 # OS specific support.  $var _must_ be set to either true or false.
