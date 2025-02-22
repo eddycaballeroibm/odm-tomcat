@@ -1,32 +1,34 @@
 # odm-tomcat
 
 ## Summary
-This repository contains a simple Tomcat v9.0.84 server that you can use in your own windows environment with just some simple changes. 
+This repository contains a simple Tomcat v9.0.84 server that you can install in your own linux environment with a simple script.
+
+## Prerequisites
+You must have a java 17 installed. The script will ask for th location.
 
 ## Steps
-### 1. Clone or download the repository onto your machine
-```
-git clone <repo URL>
-```
-### 2. Set JAVA_HOME and JRE_HOME in odm-tomcat/apache-tomcat-9.0.84/bin/catilina.bat to your JDK directory
-```
-set JAVA_HOME=C:\IBM\jdk\jdk
-set JRE_HOME=C:\IBM\jdk\jdk
-```
-### 3. Copy Decision Center and Decision Server war files to odm-tomcat/apache-tomcat-9.0.84/webapps
+### 1. Run the script 
+Navigate to the directory where you want to install the Tomcat server and run the script
+./install_tomcat_odm.sh
+
+You can copy onto your machine or create a file with 
+
+vi ./install_tomcat_odm.sh
+
+### 2. Move Decision Center and Decsion Server Archives
+The repo does not have the .war files. You must add them to the /odm-tomcat/apache-tomcat-9.0.84/webapps directoy
    
-### 4. Configure the databases
-The database is configured in _**odm-tomcat/apache-tomcat-9.0.84/conf/server.xml**_
+### 3. (Optional) Configure the databases
+The server is configured to use the same h2 database with the sample projects avaialble.
 
-There is an example configuration for Postgres and H2. 
+If you wish to configure a different database you can find example configuration in the server.xml
 
-For a quick setup, you can start the sample server and then point to the databases that are created in the Liberty _**data**_ directory
+_**odm-tomcat/apache-tomcat-9.0.84/conf/server.xml**_
 
-### 5. Start the server with the **startup** command
+### 4. Start the server with the **startup** command
 ```
-cd C:\IBM\tomcat\tomcat-test\odm-tomcat\apache-tomcat-9.0.84\bin
-startup
+/odm-tomcat/apache-tomcat-9.0.84/startup.sh
 ```
 ### 6. Access ODM with the links below
-http://localhost:9090/decisioncenter
-http://localhost:9090/res
+http://<host>:9090/decisioncenter
+http://<host>:9090/res
