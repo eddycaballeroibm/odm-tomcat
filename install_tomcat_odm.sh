@@ -3,7 +3,7 @@
 #!/bin/bash
 
 #Get java_home from user
-read -p "Enter theJAVA_HOME location: " input
+read -p "Enter the JAVA_HOME location: " input
 
 # Set the input to a variable javahome
 javahome=$input

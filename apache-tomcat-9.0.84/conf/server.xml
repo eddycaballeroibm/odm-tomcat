@@ -23,7 +23,7 @@
               pathname="conf/tomcat-users.xml" />
      
      
-     <!-- H2 Database -->
+     <!-- Decision Center H2 Database -->
      <Resource name="jdbc/ilogDataSource" 
 		auth="Container"
 		type="javax.sql.DataSource"
@@ -33,7 +33,7 @@
 		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
 		username="ilog" password="ilog"
 		description="Decision Center Database"  />
-     
+     <!-- Decision Server H2 Database-->
 	 <Resource name="jdbc/resdatasource" 
 		auth="Container"
 	    type="javax.sql.DataSource"
@@ -43,7 +43,24 @@
 		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
 	    username="ilog" password="ilog"
         description="Decision Server Database"  />
-     
+
+     <!-- Decision Center Oracle Database
+	<Resource
+		defaultTransactionIsolation="READ_COMMITTED"
+          name="jdbc/ilogDataSource"
+          auth="Container"
+          type="javax.sql.DataSource"
+          driverClassName="oracle.jdbc.OracleDriver"
+          url="jdbc:oracle:thin:@<host>:<port>/<dbname>"
+          username="username"
+          password="password"
+          maxTotal="100"
+          maxIdle="10"
+          maxWaitMillis="10000"
+          description="Decision Center Database"
+          jdbcInterceptors="StatementCache(prepared=true,callable=false,max=150)"
+     />
+     -->
   </GlobalNamingResources>
 
   <Service name="Catalina">
