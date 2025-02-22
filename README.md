@@ -29,4 +29,5 @@ _**odm-tomcat/apache-tomcat-9.0.84/conf/server.xml**_
 ```
 ### 6. Access ODM with the Links Below
 http://<host>:9090/decisioncenter
+
 http://<host>:9090/res
