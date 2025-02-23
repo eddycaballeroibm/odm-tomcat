@@ -8,21 +8,22 @@ read -p "Enter the JAVA_HOME location: " input
 # Set the input to a variable javahome
 javahome=$input
 
-# Print the variable
+# Print the javahome variable
 echo "JAVA_HOME is: $javahome"
 echo
 echo
 
 
 #clone git repo
-echo "Cloning git repo https://github.com/eddycaballeroibm/odm-tomcat.git"
+echo "Cloning odm-tomcat git repo https://github.com/eddycaballeroibm/odm-tomcat.git"
 git clone https://github.com/eddycaballeroibm/odm-tomcat.git
 echo
 echo
 
 #enter the repo
-echo "Changing directory to the git repo"
+echo "Changing directory to the odm-tomcat repo"
 cd odm-tomcat/apache-tomcat-9.0.84
+#grant permissions to tomcat serve scripts
 chmod -R +x ./bin
 echo
 echo
@@ -30,12 +31,12 @@ echo
 #set the CATALINA_HOME env variable
 catalinahome=$(pwd)
 echo "The current directory is: $catalinahome"
-echo "CATALINA_HOME will be: $catalinahome"
+echo "CATALINA_HOME will be set to: $catalinahome"
 echo
 echo
 
 
-#set file name
+#set file name to catalina.sh
 file_name="$catalinahome/bin/catalina.sh"
 
 #Add CATALINA_HOME to catalina.sh
@@ -58,3 +59,7 @@ jre_home_text="export JRE_HOME=$javahome"
 sed -i "$jre_home_line_number a $jre_home_text" $file_name
 
 echo "JRE_HOME added to catalina.sh successfully."
+echo
+echo
+echo
+echo "Tomcat server installed successfully."
