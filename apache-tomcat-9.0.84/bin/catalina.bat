@@ -115,9 +115,21 @@ rem ---------------------------------------------------------------------------
 
 setlocal
 
-rem Confire the JDK below
-set JAVA_HOME=C:\IBM\jdk\jdk
-set JRE_HOME=C:\IBM\jdk\jdk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 set CATALINA_OPTS=-Xms4096m -Xmx8192m
 set JAVA_OPTS=-Djavax.xml.bind.JAXBContext=com.sun.xml.internal.bind.v2.ContextFactory

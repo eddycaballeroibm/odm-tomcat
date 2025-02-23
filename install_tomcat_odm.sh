@@ -23,7 +23,7 @@ echo
 #enter the repo
 echo "Changing directory to the odm-tomcat repo"
 cd odm-tomcat/apache-tomcat-9.0.84
-#grant permissions to tomcat serve scripts
+#grant permissions to tomcat server scripts
 chmod -R +x ./bin
 echo
 echo
