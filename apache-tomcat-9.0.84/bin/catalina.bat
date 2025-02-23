@@ -120,7 +120,10 @@ setlocal
 
 
 set CATALINA_OPTS=-Xms4096m -Xmx8192m -Duser.timezone=America/Chicago
-
+rem JAVA_HOME JRE_HOME and CATALINA_HOME
+rem set CATALINE_HOME=
+rem set JAVA_HOME=
+rem set JRE_HOME=
 
 rem Suppress Terminate batch job on CTRL+C
 if not ""%1"" == ""run"" goto mainEntry

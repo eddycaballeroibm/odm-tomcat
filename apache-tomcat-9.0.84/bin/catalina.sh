@@ -127,16 +127,11 @@
 
 
 
-
-
-
-
-
-
-
 export CATALINA_OPTS="-Xms4096m -Xmx8192m -Duser.timezone=America/Chicago"
-
-
+# JAVA_HOME JRE_HOME and CATALINA_HOME
+#export CATALINE_HOME=
+#export JAVA_HOME=
+#export JRE_HOME=
 
 # OS specific support.  $var _must_ be set to either true or false.
 cygwin=false
