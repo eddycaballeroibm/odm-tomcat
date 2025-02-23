@@ -119,18 +119,6 @@ setlocal
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 set CATALINA_OPTS=-Xms4096m -Xmx8192m -Duser.timezone=America/Chicago
 
 
