@@ -131,8 +131,7 @@ setlocal
 
 
 
-set CATALINA_OPTS=-Xms4096m -Xmx8192m
-set JAVA_OPTS=-Djavax.xml.bind.JAXBContext=com.sun.xml.internal.bind.v2.ContextFactory
+set CATALINA_OPTS=-Xms4096m -Xmx8192m -Duser.timezone=America/Chicago
 
 
 rem Suppress Terminate batch job on CTRL+C
