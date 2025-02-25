@@ -34,15 +34,28 @@
 		username="ilog" password="ilog"
 		description="Decision Center Database"  />
      <!-- Decision Server H2 Database-->
-	 <Resource name="jdbc/resdatasource" 
-		auth="Container"
-	    type="javax.sql.DataSource"
-	    driverClassName="org.h2.Driver"
+	<Resource name="jdbc/resdatasource" 
+	     auth="Container"
+	     type="javax.sql.DataSource"
+	     driverClassName="org.h2.Driver"
 		defaultTransactionIsolation="READ_COMMITTED"
-	    url="jdbc:h2:../data/resdb;LOCK_TIMEOUT=20000;NON_KEYWORDS=VALUE"
+	     url="jdbc:h2:../data/resdb;LOCK_TIMEOUT=20000;NON_KEYWORDS=VALUE"
 		maxTotal="20" maxIdle="30" maxWaitMillis="-1"
-	    username="ilog" password="ilog"
-        description="Decision Server Database"  />
+	     username="ilog" password="ilog"
+          description="Decision Server Database"  
+     />
+        
+     <!-- Db2 Database
+     <Resource name="jdbc/ilogDataSource"
+          auth="Container"
+          driverClassName="com.ibm.db2.jcc.DB2Driver"
+          defaultTransactionIsolation="READ_COMMITTED"
+          username="db2inst1"
+          password="password"
+          type="javax.sql.DataSource"
+          url="jdbc:db2://<host>:<port>/<database_name>"
+     />
+     -->
 
      <!-- Decision Center Oracle Database
 	<Resource
@@ -86,7 +99,6 @@
           <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
                     resourceName="UserDatabase"/>
           
-     
           <Realm className="org.apache.catalina.realm.JNDIRealm"
           connectionURL="ldap://<host>:<port>"
           connectionName="uid=admin,ou=system"
@@ -104,7 +116,6 @@
           />
      </Realm>
      -->
-
 
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
