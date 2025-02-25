@@ -39,6 +39,6 @@ Windows:
 ```
 
 ### 6. Access ODM with the Links Below
-http://<host>:9090/decisioncenter
+http://\<hostname\>:9090/decisioncenter
 
-http://<host>:9090/res
+http://\<hostname\>:9090/res
