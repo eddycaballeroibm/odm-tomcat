@@ -35,7 +35,7 @@ Linux:
 ```
 Windows:
 ```
-/odm-tomcat/apache-tomcat-9.0.84/bin/startup.bar
+/odm-tomcat/apache-tomcat-9.0.84/bin/startup.bat
 ```
 
 ### 6. Access ODM with the Links Below
