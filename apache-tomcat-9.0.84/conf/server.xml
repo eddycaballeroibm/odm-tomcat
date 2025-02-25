@@ -79,6 +79,33 @@
                resourceName="UserDatabase"/>
       </Realm>
 
+     <!--  Example Combined User Database and LDAP Realm
+           Works with the LDAP config from - https://www.ibm.com/docs/en/odm/8.11.0?topic=registries-task-3-importing-decision-center-database
+           
+     <Realm className="org.apache.catalina.realm.CombinedRealm" >
+          <Realm className="org.apache.catalina.realm.UserDatabaseRealm"
+                    resourceName="UserDatabase"/>
+          
+     
+          <Realm className="org.apache.catalina.realm.JNDIRealm"
+          connectionURL="ldap://<host>:<port>"
+          connectionName="uid=admin,ou=system"
+          connectionPassword="secret"
+          userSubtree="true"
+          userBase="ou=users,dc=example,dc=com"
+          userSearch="(uid={0})"
+          roleBase="ou=groups,dc=example,dc=com"
+          roleName="cn"
+          roleSubtree="true"
+          roleSearch="(member={0})"
+          allRolesMode="AuthOnly"
+          commonRole="rtsUser"
+          roleNested="true"
+          />
+     </Realm>
+     -->
+
+
       <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
 
